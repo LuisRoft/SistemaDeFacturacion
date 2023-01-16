@@ -46,7 +46,6 @@ public class CrearCliente extends JInternalFrame {
 	 */
 	public CrearCliente() {
 		setResizable(true);
-		setIconifiable(true);
 		setMaximizable(true);
 		setBounds(100, 100, 660, 621);
 		getContentPane().setLayout(null);

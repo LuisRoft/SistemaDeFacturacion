@@ -77,10 +77,20 @@ public class MenuPrincipal extends JFrame {
 		mntmNewMenuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CrearCliente form = new CrearCliente();
-				desktopPane.add(form);
-				form.setVisible(true);
-				
-						
+				boolean mostrar=true;
+
+				for (int a=0;a<desktopPane.getComponentCount();a++){     // verificar si es instancia de algun componente que ya este en el jdesktoppane
+				    if( form.getClass().isInstance( desktopPane.getComponent(a) )){
+				        System.out.println("es instancia, no se debe mostrar");
+				        mostrar=false;
+				    }else{
+				        System.out.println("no lo es, puede mostrarse");
+				    }
+				}
+				if(mostrar){ 
+					desktopPane.add(form);
+					form.setVisible(true);
+				}						
 			}
 		});
 		mnNewMenu_1.add(mntmNewMenuItem_1);
