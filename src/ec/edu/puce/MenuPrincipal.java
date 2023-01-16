@@ -62,9 +62,9 @@ public class MenuPrincipal extends JFrame {
 		menuBar.add(mnNewMenu);
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Salir");
-		mntmNewMenuItem.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(EXIT_ON_CLOSE);
 			}
 		});
 		mnNewMenu.add(mntmNewMenuItem);
@@ -86,12 +86,6 @@ public class MenuPrincipal extends JFrame {
 		mnNewMenu_1.add(mntmNewMenuItem_1);
 		
 		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Lista de Clientes");
-		mntmNewMenuItem_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Demo demo = new Demo();
-				demo.setVisible(true);
-			}
-		});
 		mnNewMenu_1.add(mntmNewMenuItem_2);
 		
 		JMenu mnNewMenu_2 = new JMenu("Productos");

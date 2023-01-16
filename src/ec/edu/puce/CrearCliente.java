@@ -48,7 +48,7 @@ public class CrearCliente extends JInternalFrame {
 		setResizable(true);
 		setIconifiable(true);
 		setMaximizable(true);
-		setBounds(100, 100, 519, 621);
+		setBounds(100, 100, 660, 621);
 		getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Cedula");
@@ -163,10 +163,12 @@ public class CrearCliente extends JInternalFrame {
 		
 
 		JTable table = new JTable();	
+		table.setEnabled(false);
+		table.setRowSelectionAllowed(false);
 		table.setModel(model);
 		JScrollPane scrollPane = new JScrollPane(table);
 		table.setFillsViewportHeight(true);
-		scrollPane.setBounds(69, 395, 353, 132);
+		scrollPane.setBounds(33, 395, 595, 132);
 		getContentPane().add(scrollPane);
 
 
