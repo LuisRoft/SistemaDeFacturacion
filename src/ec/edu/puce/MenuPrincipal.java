@@ -1,10 +1,11 @@
 package ec.edu.puce;
 
-import java.awt.BorderLayout;
+
 import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JMenuBar;
@@ -16,10 +17,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JDesktopPane;
 import java.awt.CardLayout;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
-public class MenuPrincipal extends JFrame {
+public class MenuPrincipal extends JFrame implements ActionListener{
 
 	/**
 	 * 
@@ -27,7 +26,9 @@ public class MenuPrincipal extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JDesktopPane desktopPane;
-
+	private JMenuItem salirApp;
+	private JMenuItem crearClientes;
+	private JMenuItem crearProductos;
 	/**
 	 * Launch the application.
 	 */
@@ -61,39 +62,17 @@ public class MenuPrincipal extends JFrame {
 		mnNewMenu.setFont(new Font("Segoe UI", Font.BOLD, 14));
 		menuBar.add(mnNewMenu);
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Salir");
-		mntmNewMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.exit(EXIT_ON_CLOSE);
-			}
-		});
-		mnNewMenu.add(mntmNewMenuItem);
+		salirApp = new JMenuItem("Salir");
+		salirApp.addActionListener(this);
+		mnNewMenu.add(salirApp);
 		
 		JMenu mnNewMenu_1 = new JMenu("Clientes");
 		mnNewMenu_1.setFont(new Font("Segoe UI", Font.BOLD, 14));
 		menuBar.add(mnNewMenu_1);
 		
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Crear Clientes");
-		mntmNewMenuItem_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				CrearCliente form = new CrearCliente();
-				boolean mostrar=true;
-
-				for (int a=0;a<desktopPane.getComponentCount();a++){     // verificar si es instancia de algun componente que ya este en el jdesktoppane
-				    if( form.getClass().isInstance( desktopPane.getComponent(a) )){
-				        System.out.println("es instancia, no se debe mostrar");
-				        mostrar=false;
-				    }else{
-				        System.out.println("no lo es, puede mostrarse");
-				    }
-				}
-				if(mostrar){ 
-					desktopPane.add(form);
-					form.setVisible(true);
-				}						
-			}
-		});
-		mnNewMenu_1.add(mntmNewMenuItem_1);
+		crearClientes = new JMenuItem("Crear Clientes");
+		crearClientes.addActionListener(this);
+		mnNewMenu_1.add(crearClientes);
 		
 		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Lista de Clientes");
 		mnNewMenu_1.add(mntmNewMenuItem_2);
@@ -101,6 +80,10 @@ public class MenuPrincipal extends JFrame {
 		JMenu mnNewMenu_2 = new JMenu("Productos");
 		mnNewMenu_2.setFont(new Font("Segoe UI", Font.BOLD, 14));
 		menuBar.add(mnNewMenu_2);
+		
+		crearProductos = new JMenuItem("Crear Producto");
+		crearProductos.addActionListener(this);
+		mnNewMenu_2.add(crearProductos);
 		
 		JMenu mnNewMenu_3 = new JMenu("Redes Sociales");
 		mnNewMenu_3.setFont(new Font("Segoe UI", Font.BOLD, 14));
@@ -121,7 +104,39 @@ public class MenuPrincipal extends JFrame {
 		contentPane.setLayout(new CardLayout(0, 0));
 		
 		desktopPane = new JDesktopPane();
-		contentPane.add(desktopPane, "name_514448230003300");
+		contentPane.add(desktopPane, "desktopPane");
 		desktopPane.setLayout(null);
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == salirApp) {
+			System.exit(EXIT_ON_CLOSE);
+		} else if (e.getSource() == crearClientes) {
+			CrearCliente form = new CrearCliente();
+			crear(form);					
+		} else if (e.getSource() == crearProductos) {
+			CrearProducto form = new CrearProducto();
+			crear(form);	
+		}		
+	}
+
+	private void crear(JInternalFrame form) {		
+		boolean mostrar=true;
+
+		for (int a=0;a<desktopPane.getComponentCount();a++){     
+		    if( form.getClass().isInstance( desktopPane.getComponent(a) )){
+		        System.out.println("es instancia, no se debe mostrar");
+		        mostrar=false;
+		    }else{
+		        System.out.println("no lo es, puede mostrarse");
+		    }
+		}
+		if(mostrar){ 
+			desktopPane.add(form);
+			form.setVisible(true);
+		}	
+		
 	}
 }
